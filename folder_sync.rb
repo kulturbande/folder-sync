@@ -18,11 +18,6 @@ class FolderSync
     source_list.each do |source|
       destination_list.each do |destination|
         
-        # if source == destination
-        #   
-        # else
-        #   
-        # end
       end
     end
   end

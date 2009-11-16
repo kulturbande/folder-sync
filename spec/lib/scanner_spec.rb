@@ -15,7 +15,4 @@ describe Scanner do
     folder[0].should be_an_instance_of(Node)
   end
   
-  it "should read the file signature" do
-    @scanner.file_signature(@folder + '/blub').should have(32).items #'860ca753a4fab7206cb6fd4668eabe95'
-  end
 end
