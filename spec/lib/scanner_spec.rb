@@ -11,7 +11,7 @@ describe Scanner do
   
   it "should scan the folder structure" do
     folder = @scanner.scan_folder(@folder)
-    folder.should have(4).items #['/Blub_folder', '/Blub_folder/blah', '/blub', '/blab']
+    folder.should have(4).items
     folder[0].should be_an_instance_of(Node)
   end
   

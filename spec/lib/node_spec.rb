@@ -7,11 +7,11 @@ describe Node do
     @node = Node.new('/blab', test_folder('test1'))
   end
   
-  it "should has a node name" do
+  it "should have a node name" do
     @node.name.should include('blab')
   end
   
-  it "should has a node directory" do
+  it "should have a node directory" do
     @node.directory.should include('test')
   end
   

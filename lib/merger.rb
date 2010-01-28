@@ -7,40 +7,49 @@ class Merger
   end
 
   def merge(source, destination)
-    @list = Array.new
-    scan_list(@scanner.scan_folder(source), @scanner.scan_folder(destination))
-    @list
+    puts "Source:"
+    test(source)
+    puts "Destination:"
+    test(destination)
+    #
+    # mode: 1 :: source -> destination
+    #      -1 :: destination -> source
+    #
+    merge_arrays(1, @scanner.scan_folder(source), @scanner.scan_folder(destination))
+  end
+  
+  def test(folder)
+    @scanner.scan_folder(folder).each do |node|
+      puts "#{node.name} #{node.file_signature} - #{node.mtime}"
+    end
   end
   
   private
-    def scan_list(list1, list2)
-      # get the last elements of both lists
-      node2 = list2.last
-      while list1.empty?
-        node1 = list1.last
-        case node1.name <=> node2.name
-          when -1 then # node1
-            @list << list1.pop
-          when 0 then
-            if node1.file_signature == node2.file_signature
-              list1.pop # remove the element from the list
-              list2.pop
-            else
-              if node1.mtime < node2.mtime
-                @list << list2.pop
-                list1.pop
-                scan_list(list2,list1)
-                break
-              else
-                @list << list1.pop
-                list2.pop
-              end
-            end
-          when 1 then # node2
-            scan_list(list2, list1)
-            break
-        end
+    def merge_arrays(mode, source, destination)
+      source.collect do |source_item|
+        
       end
-      scan_list(list2, list1) unless list2.empty?
-    end 
+    end
 end
+
+# void merge(int lo, int m, int hi)
+# {
+#     int i, j, k;
+# 
+#     i=0; j=lo;
+#     // vordere Hälfte von a in Hilfsarray b kopieren
+#     while (j<=m)
+#         b[i++]=a[j++];
+# 
+#     i=0; k=lo;
+#     // jeweils das nächstgrößte Element zurückkopieren
+#     while (k<j && j<=hi)
+#         if (b[i]<=a[j])
+#             a[k++]=b[i++];
+#         else
+#             a[k++]=a[j++];
+# 
+#     // Rest von b falls vorhanden zurückkopieren
+#     while (k<j)
+#         a[k++]=b[i++];
+# }
