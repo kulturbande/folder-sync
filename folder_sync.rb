@@ -10,27 +10,6 @@ class FolderSync
     # !(source == nil || @destination == nil)
   end
   
-  def generate_merged_list
-    source_list = get_folder_structure(source)
-    destination_list = get_folder_structure(destination)
-    # simple merge with two sort lists
-    # with an alternate loop
-    source_list.each do |source|
-      destination_list.each do |destination|
-        
-      end
-    end
-  end
-  
-  # def get_folder_structure(directory)
-  #   folder = Array.new
-  #   Find.find(directory) do |f|
-  #     folder << f[directory.length, f.length] unless f == directory
-  #     #folder << {:file => f[directory.length, f.length], :signature => file_signature(f)} unless f == directory
-  #   end
-  #   folder
-  # end
-  
   private
     def file_signature(file)
       Digest::MD5.hexdigest(File.read(file)) unless File.directory?(file)

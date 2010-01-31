@@ -5,51 +5,37 @@ class Merger
   def initialize
     @scanner = Scanner.new
   end
-
-  def merge(source, destination)
-    puts "Source:"
-    test(source)
-    puts "Destination:"
-    test(destination)
-    #
-    # mode: 1 :: source -> destination
-    #      -1 :: destination -> source
-    #
-    merge_arrays(1, @scanner.scan_folder(source), @scanner.scan_folder(destination))
-  end
   
-  def test(folder)
-    @scanner.scan_folder(folder).each do |node|
-      puts "#{node.name} #{node.file_signature} - #{node.mtime}"
-    end
+  def merge_folders(source_folder, destination_folder)
+    source = @scanner.scan_folder(source_folder)
+    destination = @scanner.scan_folder(destination_folder)
+    mergesort(source.concat(destination))
   end
   
   private
-    def merge_arrays(mode, source, destination)
-      source.collect do |source_item|
-        
+    def mergesort(list)
+      return list if list.size <= 1
+      mid = list.size / 2
+      left  = list[0, mid]
+      right = list[mid, list.size]
+      merge(mergesort(left), mergesort(right))
+    end
+  
+    def merge(left, right)
+      sorted_list = Array.new
+      until left.empty? or right.empty?
+        if left.first.name == right.first.name
+          left_item = left.shift
+          right_item = right.shift
+          unless left_item.file_signature == right_item.file_signature
+            (left_item.mtime > right_item.mtime) ? sorted_list << left_item : sorted_list << right_item 
+          end
+        elsif left.first.name < right.first.name
+          sorted_list << left.shift
+        else
+          sorted_list << right.shift
+        end
       end
+      sorted_list.concat(left).concat(right)
     end
 end
-
-# void merge(int lo, int m, int hi)
-# {
-#     int i, j, k;
-# 
-#     i=0; j=lo;
-#     // vordere Hälfte von a in Hilfsarray b kopieren
-#     while (j<=m)
-#         b[i++]=a[j++];
-# 
-#     i=0; k=lo;
-#     // jeweils das nächstgrößte Element zurückkopieren
-#     while (k<j && j<=hi)
-#         if (b[i]<=a[j])
-#             a[k++]=b[i++];
-#         else
-#             a[k++]=a[j++];
-# 
-#     // Rest von b falls vorhanden zurückkopieren
-#     while (k<j)
-#         a[k++]=b[i++];
-# }
