@@ -4,10 +4,19 @@ require 'merger'
 describe Merger do
   
   before(:each) do
-    @merger = Merger.new
+    merger_class = Merger.new
+    @merger = merger_class.merge_folders(test_folder("test1"), test_folder("test2"))
   end
   
-  it "should merge two folder structures" do
-    @merger.merge_folders(test_folder("test1"), test_folder("test2")).should have(3).items
+  it "should get 3 items" do
+    @merger.should have(3).items
+  end
+  
+  it "should have Node object items" do
+    @merger.first.should be_an_instance_of(Node)
+  end
+  
+  it "should have foo as last item" do
+    @merger.last.name.should include("foo")
   end
 end
