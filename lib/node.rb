@@ -1,7 +1,7 @@
 require 'digest'
 
 class Node
-  attr_accessor :name, :directory
+  attr_accessor :name, :directory, :information_flag
   
   def initialize(name, directory)
     @name = name
@@ -12,7 +12,7 @@ class Node
     File.join(@directory, @name)
   end
   
-  def file_signature
+  def file_signature 
     Digest::MD5.hexdigest(File.read(file)) unless File.directory?(file)
   end
   
@@ -20,4 +20,7 @@ class Node
     File.mtime(file)
   end
   
+  def delete_node
+    @information_flag = "deleted"
+  end
 end

@@ -10,7 +10,7 @@ describe Scanner do
   end
   
   it "should have 4 items" do
-    @folder.should have(4).items
+    @folder.should have(4).items 
   end
   
   it "should be an instance of Node" do

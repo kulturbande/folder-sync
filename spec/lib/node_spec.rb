@@ -9,7 +9,7 @@ describe Node do
   
   it "should have a node name" do
     @node.name.should include('blab')
-  end
+  end 
   
   it "should have a node directory" do
     @node.directory.should include('test')
@@ -21,6 +21,15 @@ describe Node do
   
   it "should get the modification time" do
     @node.mtime.should be_an_instance_of(Time)
+  end
+  
+  it "should have an information flag" do
+    @node.information_flag.should be_nil
+  end
+  
+  it "should set the delete information" do
+    @node.delete_node
+    @node.information_flag.should == "deleted"
   end
   
 end

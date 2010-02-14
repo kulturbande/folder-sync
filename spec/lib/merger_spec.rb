@@ -9,7 +9,7 @@ describe Merger do
   end
   
   it "should get 3 items" do
-    @merger.should have(3).items
+    @merger.should have(3).items 
   end
   
   it "should have Node object items" do
@@ -17,6 +17,6 @@ describe Merger do
   end
   
   it "should have foo as last item" do
-    @merger.last.name.should include("foo")
+    @merger.last.name.should include("foo") 
   end
 end
