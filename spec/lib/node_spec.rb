@@ -23,13 +23,13 @@ describe Node do
     @node.mtime.should be_an_instance_of(Time)
   end
   
-  it "should have an information flag" do
-    @node.information_flag.should be_nil
+  it "should have a delete flag" do
+    @node.delete?.should be_false
   end
   
   it "should set the delete information" do
-    @node.delete_node
-    @node.information_flag.should == "deleted"
+    @node.delete!
+    @node.delete?.should be_true
   end
   
 end

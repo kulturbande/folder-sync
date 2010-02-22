@@ -1,11 +1,12 @@
 require 'digest'
 
 class Node
-  attr_accessor :name, :directory, :information_flag
+  attr_accessor :name, :directory
   
   def initialize(name, directory)
     @name = name
     @directory = directory
+    @delete_flag = false
   end
   
   def file
@@ -20,7 +21,11 @@ class Node
     File.mtime(file)
   end
   
-  def delete_node
-    @information_flag = "deleted"
+  def delete!
+    @delete_flag = true
+  end
+  
+  def delete?
+    @delete_flag
   end
 end
