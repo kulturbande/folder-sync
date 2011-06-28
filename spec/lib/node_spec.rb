@@ -22,14 +22,14 @@ describe Node do
   it "should get the modification time" do
     @node.mtime.should be_an_instance_of(Time)
   end
-  
+   
   it "should have a delete flag" do
-    @node.delete?.should be_false
+    @node.deleted?.should be_false
   end
   
   it "should set the delete information" do
     @node.delete!
-    @node.delete?.should be_true
+    @node.deleted?.should be_true
   end
   
 end

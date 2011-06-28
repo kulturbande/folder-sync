@@ -9,13 +9,13 @@ describe Syncer do
   
   describe "direction" do
     it "should have a direction" do
-      @syncer.direction.should == "both"
+      @syncer.direction.should == "source_destination"
     end
      
     it "should have a direction from source to destination" do
-      @syncer.from_source_to_destination
+      @syncer.from_source_to_destination 
       @syncer.direction.should == "source_destination"
-    end
+    end 
     
     it "should have a direction from destination to source" do
       @syncer.from_destination_to_source
@@ -26,7 +26,6 @@ describe Syncer do
   describe "calculate" do
     
     before(:each) do
-      @syncer.from_destination_to_source
       @folder_array = @syncer.calculate
     end
     
@@ -38,10 +37,16 @@ describe Syncer do
       @folder_array[1].deleted?.should be_true
     end
     
+    it "should render array" do
+      puts ""
+      @folder_array.each do |node|
+        puts "#{node.name} Deleted?: #{node.deleted?}" 
+      end
+    end
   end
   
   it "should simulate the sync" do
-    @syncer.simulate
+    #@syncer.simulate
     
   end
   

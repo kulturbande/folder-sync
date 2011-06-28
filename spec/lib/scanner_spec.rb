@@ -14,7 +14,7 @@ describe Scanner do
   end
   
   it "should be an instance of Node" do
-    @folder.first.should be_an_instance_of(Node)
+    @folder.first.should be_an_instance_of(Node) 
   end
   
   it "should have the name 'foo' as the first element" do

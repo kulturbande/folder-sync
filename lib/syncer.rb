@@ -7,7 +7,7 @@ class Syncer
   def initialize(source, destination)
     @source = source
     @destination = destination
-    @direction = "both"
+    @direction = "source_destination"
   end
   
   def simulate
@@ -17,11 +17,16 @@ class Syncer
   def calculate
     merger = Merger.new
     folder = merger.merge_folders(@source, @destination)
-    if @direction == "source_destination"
-      
-    else
-      
+    folder.each do |node|
+      puts node.name
+      case @direction
+        when "source_destination":
+          node.delete! if node.directory == @destination
+        when "destination_source":
+          node.delete! if node.directory == @source
+      end
     end
+    folder
   end
   
   def from_source_to_destination

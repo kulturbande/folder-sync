@@ -25,7 +25,7 @@ class Node
     @delete_flag = true
   end
   
-  def delete?
+  def deleted?
     @delete_flag
   end
 end

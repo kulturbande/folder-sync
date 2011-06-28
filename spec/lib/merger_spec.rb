@@ -9,11 +9,15 @@ describe Merger do
   end
   
   it "should get 3 items" do
-    @merger.should have(3).items 
+    @merger.should have(3).items
   end
   
   it "should have Node object items" do
     @merger.first.should be_an_instance_of(Node)
+  end
+  
+  it "should have blah as first item" do
+    @merger.first.name.should include("blah") 
   end
   
   it "should have foo as last item" do
